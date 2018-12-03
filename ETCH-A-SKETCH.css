@@ -1,0 +1,45 @@
+body{
+    width: 400px;
+    border: 2px solid lightgray;
+    margin: 0 auto;
+}
+
+.gridContainer {
+    display: inline-grid;
+    grid-template-columns: 25px;
+    grid-template-rows: 25px;
+    align-content: center;
+    justify-content: center;
+    margin-top:20px;
+    border: 1px solid green;r
+}
+
+.gridItem {
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid white;
+    padding: 3px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+
+}
+
+h1{
+    text-align: center;
+    margin-top: 40px;
+}
+
+button{
+    width: 50%;
+    height: 30px;
+    border-radius: 5px;
+    background-color: gray;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    display: block;
+    margin:  auto;
+}
+
+

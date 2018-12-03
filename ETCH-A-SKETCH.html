@@ -1,0 +1,119 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+        <link href="./ETCH-A-SKETCH.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <div class = top>
+        <h1>ETCH-A-SKETCH</h1><br>
+        <button class ='askgrid'>Reset the dimention</button>
+        <button class = 'randomColor'>Use Random Color</button>
+        <button class = 'monoColor'>Use Mono Color</button>
+    </div>
+    <div class = 'gridContainer'></div>
+
+    <script>
+        function createGrid(gridWidth){
+            for(j=1; j<=d; j++){
+                gridCtn.style.gridTemplateColumns += ' ' + gridWidth + 'px';
+                gridCtn.style.gridTemplateRows += ' ' + gridWidth + 'px';
+            }
+
+            for(i=1; i<=w; i++){
+                let grid = document.createElement('div');
+                grid.classList.add('gridItem');
+                //grid.textContent = i;
+                gridCtn.appendChild(grid);
+            }
+        }
+
+        function colorGrid(redC, greenC, blueC){
+            let gridchg = document.querySelectorAll('.gridItem');
+
+            gridchg.forEach((div) => {
+                //delete old color
+                div.style.background = 'white';
+                //add new color
+                if(redC == 0 && greenC == 0 && blueC == 0){
+                    div.addEventListener('mouseenter',()=>{
+                    redC = Math.floor(Math.random() * 256);
+                    greenC = Math.floor(Math.random() * 256);
+                    blueC = Math.floor(Math.random() * 256);
+                    div.style.background = 'rgb(' + redC + ',' + greenC + ',' + blueC + ')';
+                    })
+                }else if(redC == 255 && greenC == 255 && blueC == 255){
+                    div.addEventListener('mouseenter',()=>{
+                    redC -= 25.5;
+                    greenC -= 25.5;
+                    blueC -= 25.5;
+                    div.style.background = 'rgb(' + redC + ',' + greenC + ',' + blueC + ')';
+                    })
+                }
+                
+                
+                else{
+                    div.addEventListener('mouseenter',()=>{
+                    div.style.background = 'rgb(' + redC + ',' + greenC + ',' + blueC + ')';
+                    });
+                }
+            });
+        }
+
+
+        let gridCtn = document.querySelector('.gridContainer');
+        let d = 16;
+        let w = d * d;
+        let orgGridWidth = 25;
+        let bodyCtn = document.querySelector('body');
+        bodyCtn.addEventListener('load',createGrid(orgGridWidth));
+        bodyCtn.addEventListener('load',colorGrid(40, 150, 30));
+
+
+        //button
+        
+        let gridbtn = document.querySelector('.askgrid');
+        gridbtn.addEventListener('click',()=>{
+            
+            //removeChild
+            
+            let griddelete = document.querySelectorAll('.gridItem');
+            griddelete.forEach((div)=>{
+                gridCtn.removeChild(div);
+            })
+            
+            //delete old & create new
+            //parentNode.removeChild(child) 
+            
+            
+            let dmt = prompt('input the dimention');
+            d = dmt;
+            w = d * d;
+            boxwidth = 400/d;
+
+            //1. delete old
+            gridCtn.style.gridTemplateColumns = '';
+            gridCtn.style.gridTemplateRows = '';
+
+            //2. create new
+            createGrid(boxwidth);
+
+            //3. color grid
+            colorGrid();
+        })
+
+        //using random rgb to color grids
+        let rdcl = document.querySelector('.randomColor');
+        rdcl.addEventListener('click',()=>{
+            colorGrid(0,0,0);
+        });
+
+        //using mono color for grids
+        let mncl = document.querySelector('.monoColor');
+        mncl.addEventListener('click',()=>{
+            colorGrid(255,255,255);
+        });
+
+
+    </script>
+</body>
+</html>
